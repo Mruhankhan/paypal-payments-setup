@@ -2,7 +2,6 @@ require("dotenv").config()
 const express = require("express")
 const paypal = require("@paypal/checkout-server-sdk")
 const app = express()
-
 app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(express.json())
@@ -63,12 +62,10 @@ app.post("/order", async (req, res) => {
   })
   try {
     const order = await client.execute(send)
-    console.log(order)
     res.json({ id: order.result.id })
   } catch (err) {
-    console.log(err)
     res.status(404).json({ err: err.message })
   }
 })
 
-app.listen(5200)
+app.listen(3090)
