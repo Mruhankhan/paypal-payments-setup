@@ -11,7 +11,7 @@ paypal
           items: [
             {
               id: 1,
-              quantity: 100,
+              quantity: 1000,
             },
             {
               id: 2,
