@@ -1,40 +1,35 @@
 paypal
   .Buttons({
     // Sets up the transaction when a payment button is clicked
-    createOrder: function () {
-      return fetch("/order", {
-        method: "POST",
-        headers: {
-          "Context-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: [
-            {
-              id: 1,
-              quantity: 1000,
+    createOrder: function (data, actions) {
+      return actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD",
+              value: "100",
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: "100",
+                },
+              },
             },
-            {
-              id: 2,
-              quantity: 2000,
-            },
-          ],
-        }),
+            items: [
+              {
+                name: "First Product Name",
+                description: "Optional descriptive text...",
+                unit_amount: {
+                  currency_code: "USD",
+                  value: "50",
+                },
+                quantity: "2",
+              },
+            ],
+          },
+        ],
       })
-        .then((res) => {
-          if (res.ok) {
-            return res.json()
-          } else {
-            return res.json().then((json) => Promise.reject(json))
-          }
-        })
-        .then(({ id }) => {
-          return id
-        })
-        .catch((err) => {
-          console.error(err)
-        })
     },
-
     // Finalize the transaction after payer approval
     onApprove: function (data, actions) {
       return actions.order.capture().then(function (orderData) {
