@@ -7,23 +7,50 @@ paypal
           {
             amount: {
               currency_code: "USD",
-              value: "100",
+              value: "8150",
               breakdown: {
                 item_total: {
                   currency_code: "USD",
-                  value: "100",
+                  value: "8150",
                 },
               },
             },
             items: [
               {
-                name: "First Product Name",
-                description: "Optional descriptive text...",
+                name: "Laptop",
+                description: "Hp Laptop",
                 unit_amount: {
                   currency_code: "USD",
-                  value: "50",
+                  value: "1200",
+                },
+                quantity: "1",
+              },
+              {
+                name: "I Phone",
+                description: "I Phone 12",
+                unit_amount: {
+                  currency_code: "USD",
+                  value: "1300",
+                },
+                quantity: "4",
+              },
+              {
+                name: "I mac",
+                description: "late 2009 imac",
+                unit_amount: {
+                  currency_code: "USD",
+                  value: "250",
                 },
                 quantity: "2",
+              },
+              {
+                name: "Laptops Imac Phone Screen Covers",
+                description: "late 2009 imac",
+                unit_amount: {
+                  currency_code: "USD",
+                  value: "250",
+                },
+                quantity: "5",
               },
             ],
           },
@@ -51,3 +78,4 @@ paypal
     },
   })
   .render("#paypal-button")
+console.log(1200 + 1300 * 4 + 250 * 2 + 250 * 5)
