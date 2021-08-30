@@ -1,8 +1,28 @@
 paypal
   .Buttons({
-    // Sets up the transaction when a payment button is clicked
+    style: {
+      shape: "pill",
+      color: "blue",
+      layout: "vertical",
+      label: "paypal",
+    },
+    onError: function (err) {
+      console.log(err)
+    },
     createOrder: function (data, actions) {
       return actions.order.create({
+        purchase_units: [
+          {
+            amount: {
+              currency_code: "USD",
+              breakdown: {
+                item_total: { currency_code: "USD", value: 1 },
+                shipping: { currency_code: "USD", value: 100 },
+                tax_total: { currency_code: "USD", value: 0.08 },
+              },
+            },
+          },
+        ],
         purchase_units: [
           {
             amount: {
@@ -57,10 +77,8 @@ paypal
         ],
       })
     },
-    // Finalize the transaction after payer approval
-    onApprove: function (data, actions) {
+    onApprove: function (actions) {
       return actions.order.capture().then(function (orderData) {
-        // Successful capture! For dev/demo purposes:
         console.log(
           "Capture result",
           orderData,
@@ -78,4 +96,3 @@ paypal
     },
   })
   .render("#paypal-button")
-console.log(1200 + 1300 * 4 + 250 * 2 + 250 * 5)
