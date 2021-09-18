@@ -65,22 +65,13 @@ paypal
         ],
       })
     },
-    onApprove: function (actions) {
+  onApprove: function (data, actions) {
       return actions.order.capture().then(function (orderData) {
-        console.log(
-          "Capture result",
-          orderData,
-          JSON.stringify(orderData, null, 2),
-        )
+        console.log("Capture result", orderData, JSON.stringify(orderData, null, 2))
         var transaction = orderData.purchase_units[0].payments.captures[0]
-        alert(
-          "Transaction " +
-            transaction.status +
-            ": " +
-            transaction.id +
-            "\n\nSee console for all available details",
-        )
+        alert("Transaction " + transaction.status + ": " + transaction.id + "\n\nSee console for all available details")
       })
     },
   })
   .render("#paypal-button")
+
